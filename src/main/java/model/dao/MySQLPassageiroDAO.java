@@ -94,6 +94,25 @@ public class MySQLPassageiroDAO implements PassageiroDAO {
 
 		return p;
 	}
+	
+	@Override
+	public Passageiro findByEmail(String email) throws ModelException {
+		DBHandler db = new DBHandler();
+
+		String sql = "SELECT * FROM passageiro WHERE email = ?;";
+
+		db.prepareStatement(sql);
+		db.setString(1, email);
+		db.executeQuery();
+
+		Passageiro p = null;
+		while (db.next()) {
+			p = createPassageiro(db);
+			break;
+		}
+
+		return p;
+	}
 
 	private Passageiro createPassageiro(DBHandler db) throws ModelException {
 		Passageiro p = new Passageiro();

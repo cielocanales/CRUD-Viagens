@@ -11,4 +11,5 @@ public interface PassageiroDAO {
 	boolean delete(Passageiro passageiro) throws ModelException;
 	List<Passageiro> listAll() throws ModelException;
 	Passageiro findById(int id) throws ModelException;
+	Passageiro findByEmail(String email) throws ModelException;
 }
