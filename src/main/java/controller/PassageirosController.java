@@ -12,6 +12,7 @@ import model.ModelException;
 import model.Passageiro;
 import model.dao.DAOFactory;
 import model.dao.PassageiroDAO;
+import model.utils.PasswordEncryptor;
 
 @WebServlet(urlPatterns = {"/passageiros", "/passageiros/form", "/passageiros/delete", "/passageiros/insert", "/passageiros/update"})
 public class PassageirosController extends HttpServlet {
@@ -111,8 +112,9 @@ public class PassageirosController extends HttpServlet {
 		passageiro.setNome(req.getParameter("nome"));
 		passageiro.setCpf(req.getParameter("cpf"));
 		passageiro.setEmail(req.getParameter("email"));
-		// TODO: guardar um hash da senha (ex.: BCrypt) em vez do texto puro
-		passageiro.setSenha(req.getParameter("senha"));
+		
+		String senhaHash = PasswordEncryptor.hashPassword(req.getParameter("senha"));
+		passageiro.setSenha(senhaHash);
 
 		PassageiroDAO dao = DAOFactory.createDAO(PassageiroDAO.class);
 
@@ -141,8 +143,10 @@ public class PassageirosController extends HttpServlet {
 
 		// senha em branco no formulário = mantém a senha atual
 		String senha = req.getParameter("senha");
-		if (senha != null && !senha.isEmpty())
-			passageiro.setSenha(senha);
+		if (senha != null && !senha.isEmpty()) {
+			String senhaHash = PasswordEncryptor.hashPassword(senha);
+			passageiro.setSenha(senhaHash);
+		}
 
 		PassageiroDAO dao = DAOFactory.createDAO(PassageiroDAO.class);
 

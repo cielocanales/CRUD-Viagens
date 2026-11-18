@@ -20,6 +20,8 @@
 				<li><a href="${pageContext.request.contextPath}/localizacoes"><span class="glyphicon glyphicon-map-marker"></span><strong>&nbsp;Localizações</strong></a></li>
 				<li><a href="${pageContext.request.contextPath}/viagens"><span class="glyphicon glyphicon-road"></span><strong>&nbsp;Viagens</strong></a></li>
 				<li><a href="${pageContext.request.contextPath}/bilhetes"><span class="glyphicon glyphicon-tag"></span><strong>&nbsp;Bilhetes</strong></a></li>
+				<li><a href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-out"></span><strong>&nbsp;Sair</strong></a></li>
+				
 			</ul>
 		</div>
 	</div>
